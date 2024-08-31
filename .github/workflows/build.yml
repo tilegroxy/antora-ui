@@ -4,6 +4,8 @@ on:
     branches: [ "tilegroxy" ]
     tags:
       - "v*"
+  pull_request:
+    branches: [ "tilegroxy" ]
 jobs:
   build:
     runs-on: ubuntu-latest
