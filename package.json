@@ -15,7 +15,7 @@
   ],
   "devDependencies": {
     "@asciidoctor/core": "~3.0",
-    "@fontsource/roboto": "~4.5",
+    "@fontsource/roboto": "~5.0",
     "@fontsource/roboto-mono": "~4.5",
     "@vscode/gulp-vinyl-zip": "~2.5",
     "autoprefixer": "~9.7",
