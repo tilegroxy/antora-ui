@@ -1,2 +1,5 @@
-{{> footer-content}}
+<footer class="footer">
+  <p>{{#with site.keys.footer_text}}{{{this}}}{{else}}© {{year}} {{site.title}}{{/with}}</p>
+  <p>Powered by <a href="https://antora.org">Antora &amp; Antora UI</a> under the terms of the <a href="https://www.mozilla.org/en-US/MPL/2.0/">Mozilla Public License Version 2.0</a> (MPL-2.0).</p>
+</footer>
 {{> footer-scripts}}

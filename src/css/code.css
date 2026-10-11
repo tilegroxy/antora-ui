@@ -1,0 +1,143 @@
+.doc .listingblock .content,
+.doc .literalblock .content {
+  position: relative;
+}
+
+.doc pre {
+  margin: 0;
+  padding: 14px 16px;
+  background: var(--code-bg);
+  color: var(--code-ink);
+  border: 1px solid var(--code-border);
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.7;
+  overflow-x: auto;
+  tab-size: 2;
+}
+
+.doc pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+.doc .listingblock.has-toolbox pre {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top: 0;
+}
+
+.source-toolbox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 38px;
+  padding: 0 8px 0 16px;
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  border-bottom-color: var(--code-rule);
+  border-radius: 8px 8px 0 0;
+  font-size: 12px;
+  color: var(--code-muted);
+}
+
+.source-lang {
+  font-family: var(--mono);
+}
+
+.copy-button {
+  height: 26px;
+  padding: 0 10px;
+  border: 1px solid #33465f;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--code-ink);
+  font: inherit;
+  font-family: var(--sans);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.copy-button:hover {
+  border-color: var(--code-muted);
+}
+
+.doc .listingblock > .title + .content .source-toolbox {
+  border-top-left-radius: 8px;
+}
+
+.doc pre .placeholder {
+  color: var(--code-ph);
+}
+
+.hljs-attr,
+.hljs-name,
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-section {
+  color: var(--code-key);
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-symbol,
+.hljs-bullet {
+  color: var(--code-lit);
+}
+
+.hljs-built_in,
+.hljs-type,
+.hljs-variable,
+.hljs-template-variable {
+  color: var(--code-ph);
+}
+
+.hljs-comment,
+.hljs-quote,
+.hljs-meta {
+  color: var(--code-muted);
+  font-style: normal;
+}
+
+.hljs-string {
+  color: var(--code-ink);
+}
+
+.hljs-title,
+.hljs-function {
+  color: #cfe3b8;
+}
+
+.doc pre .conum[data-value] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  margin-left: 10px;
+  border-radius: 50%;
+  background: var(--code-rule);
+  color: var(--code-ink);
+  font-family: var(--sans);
+  font-style: normal;
+  font-size: 10.5px;
+  font-weight: 600;
+  vertical-align: 1px;
+  cursor: pointer;
+}
+
+.doc pre .conum[data-value]::after {
+  content: attr(data-value);
+}
+
+.doc pre .conum + b {
+  display: none;
+}
+
+.doc pre .conum.is-active {
+  background: var(--code-ph);
+  color: var(--code-bg);
+}

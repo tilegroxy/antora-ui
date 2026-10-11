@@ -1,1 +1,11 @@
-    {{!-- Add additional meta tags here --}}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+{{#with (or antoraVersion site.antoraVersion)}}
+    <meta name="generator" content="Antora {{this}}">
+{{/with}}
+{{#with page.description}}
+    <meta name="description" content="{{detag this}}">
+{{/with}}
+{{#with page.keywords}}
+    <meta name="keywords" content="{{this}}">
+{{/with}}

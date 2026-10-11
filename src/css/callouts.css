@@ -1,0 +1,103 @@
+.doc .annotated {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.doc .annotated > .listingblock {
+  position: sticky;
+  top: calc(var(--header-h) + 16px);
+  margin: 0;
+  min-width: 0;
+}
+
+.doc .annotated > .colist {
+  margin: 0;
+}
+
+.doc .annotated .listingblock .content,
+.doc .annotated .tabpanel {
+  position: relative;
+}
+
+.doc .line-hl {
+  position: absolute;
+  left: 1px;
+  right: 1px;
+  pointer-events: none;
+  background: rgba(242, 166, 90, 0.12);
+  box-shadow: inset 3px 0 0 var(--code-ph);
+}
+
+.doc .colist table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.doc .colist tr {
+  cursor: pointer;
+}
+
+.doc .colist td {
+  vertical-align: top;
+  padding: 10px 12px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.doc .colist td:first-child {
+  width: 46px;
+  padding-right: 0;
+}
+
+.doc .colist tr.is-active td {
+  background: var(--white);
+}
+
+.doc .colist tr.is-active td:first-child {
+  border-radius: 7px 0 0 7px;
+  box-shadow: inset 1px 1px 0 var(--rule), inset 0 -1px 0 var(--rule);
+}
+
+.doc .colist tr.is-active td:last-child {
+  border-radius: 0 7px 7px 0;
+  box-shadow: inset -1px 1px 0 var(--rule), inset 0 -1px 0 var(--rule);
+}
+
+.doc .colist .conum[data-value] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--paper-3);
+  color: var(--ink-2);
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.doc .colist .conum[data-value]::after {
+  content: attr(data-value);
+}
+
+.doc .colist .conum + b {
+  display: none;
+}
+
+.doc .colist tr.is-active .conum {
+  background: var(--code-ph);
+  color: var(--code-bg);
+}
+
+@media (max-width: 1024px) {
+  .doc .annotated {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .doc .annotated > .listingblock {
+    position: static;
+  }
+}

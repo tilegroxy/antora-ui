@@ -1,11 +1,10 @@
-<main class="article">
-{{> toolbar}}
+<main class="main">
   <div class="content">
-{{#if (eq page.layout '404')}}
-{{> article-404}}
-{{else}}
+    <article class="doc">
+{{> page-header}}
+{{{page.contents}}}
+{{> pagination}}
+    </article>
 {{> toc}}
-{{> article}}
-{{/if}}
   </div>
 </main>

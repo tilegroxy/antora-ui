@@ -1,0 +1,124 @@
+= tilegroxy UI ("Survey" theme)
+:url-repo: https://github.com/Michad/tilegroxy
+
+This UI is built with `npx gulp bundle` (see link:README.adoc[README]) and produces `build/ui-bundle.zip`.
+This page describes what the theme expects from the playbook and the content.
+
+== Playbook
+
+[,yaml]
+----
+site:
+  title: tilegroxy Docs
+  keys:
+    product_name: tilegroxy
+    repo_url: https://github.com/Michad/tilegroxy
+    issues_url: https://github.com/Michad/tilegroxy/issues
+    releases_url: https://github.com/Michad/tilegroxy/releases
+    footer_text: 'Copyright© Michael Davis and individual contributors to tilegroxy. Tilegroxy licensed under <a href="http://www.apache.org/licenses/">Apache License, Version 2.0</a>'
+ui:
+  bundle:
+    url: ./ui-bundle.zip
+    snapshot: true
+antora:
+  extensions:
+  - '@antora/lunr-extension'
+asciidoc:
+  extensions:
+  - '@asciidoctor/tabs'
+----
+
+The header links (GitHub, Issues, Get tilegroxy) and the footer copyright come from `site.keys`.
+Each link is omitted when its key isn't set, and the footer falls back to `© <year> <site title>`.
+`site.keys.googleAnalytics` still enables Google Analytics.
+
+The UI provides the `#search-input` field and the `search-scripts` partial hook the lunr extension expects.
+The UI restyles the output of the tabs extension, but doesn't ship its stylesheet or script.
+The site must provide those, as it does today.
+
+If a `supplemental_ui` folder adds `table-filter.js`/`.css`, remove it.
+Filtering is built into the UI.
+
+== What the UI does automatically
+
+* *Option tables become option rows.*
+Any table whose first header is `Parameter`, `Option`, `Flag`, `Name` or `Key` and that also has a `Description` column (plus at least one of `Type`, `Required` or `Default`) is rebuilt as a list.
+Each row gets an anchor (`#opt-url`).
+A filter box appears at 6 or more rows.
+Add the `nofilter` role to suppress the filter, or `nooptions` to keep a plain table.
+* *Grouping.* Add a `Group` column to an options table and rows are grouped under headings, with chips to narrow by group.
+The column itself isn't displayed.
+* *Callouts beside code.* A listing (or code tabs) followed directly by a callout list is laid out side by side.
+Clicking a number on either side highlights the line.
+* *Code tabs.* Tabs that only contain code (YAML/JSON, Binary/Container) render as one dark card with a single copy button.
+* *Code blocks* get a language label and a copy button.
+Copied text excludes callout markers.
+`\{placeholders}` are highlighted in YAML, JSON and shell blocks.
+* *Admonitions* get a type label.
+A block title becomes a heading.
+* *On this page* is built from h2/h3 headings, with scroll-spy.
+Use `:page-toclevels: 1` to show h2 only.
+* kbd:[⌘ K], kbd:[Ctrl+K] or kbd:[/] focuses search.
+The sidebar has a "Filter pages" box and expands only the current branch.
+
+== Page attributes the header reads
+
+[,asciidoc]
+----
+= Proxy
+:description: The Proxy provider is the simplest option that simply forwards tile requests to another HTTP(s) endpoint.
+:page-eyebrow: Provider
+:page-config-name: proxy
+:page-tags: ZXY · TMS · WMTS · WMS
+----
+
+[cols="1,3",options=header]
+|===
+|Attribute |Renders
+
+|`:description:` |Lede under the title (also the meta description)
+|`:page-eyebrow:` |Small label above the title
+|`:page-config-name:` |Copyable `name: proxy` chip
+|`:page-config-key:` |`key: layers[]` chip
+|`:page-command:` |Copyable `$ tilegroxy seed` chip
+|`:page-tags:` |Comma-separated plain chips
+|`:page-pagination:` |Prev/next cards (set it in `antora.yml` to turn it on everywhere)
+|===
+
+== Sidebar groups
+
+Group labels come from list titles in `nav.adoc`.
+Split a single list into titled lists:
+
+[,asciidoc]
+----
+.Get started
+* xref:get-it.adoc[]
+* xref:quickstart.adoc[]
+
+.Configure
+* xref:configuration/index.adoc[]
+** xref:configuration/layer.adoc[]
+
+.Operate
+* xref:commands/index.adoc[]
+----
+
+== Home page
+
+Set `:page-layout: home` on the component start page and make it the site start page (`site.start_page`).
+The layout is styled by roles: `[.hero]` (containing `[.eyebrow]`, a `[discrete]` heading, `[.lead]`, `[.actions]` and an optional code block or code tabs), `[.paths]` and `[.features]`.
+See `preview-src/home.adoc` for a complete example.
+
+== Fonts
+
+`head-styles.hbs` loads Source Serif 4, Source Sans 3 and Source Code Pro from Google Fonts.
+To self-host, put the `.woff2` files in `src/font/`, add `@font-face` rules to `src/css/vars.css`, and remove the `<link>` lines.
+
+== Content changes that complete the design
+
+These need edits to the {url-repo}[tilegroxy] `.adoc` source:
+
+* *Example before reference.* Move the `Example` tabs above the options table on provider, cache and auth pages.
+* *Command flags.* Add a `Flag | Type | Default | Description` table to command pages so they render as option rows.
+* *Diagrams.* Replace the draw.io PNGs with source diagrams via `asciidoctor-kroki` (D2 or Mermaid), using SVG output.

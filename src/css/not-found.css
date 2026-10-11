@@ -1,0 +1,15 @@
+.not-found {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 120px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.not-found h1 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 46px;
+  font-weight: 600;
+}

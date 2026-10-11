@@ -1,0 +1,77 @@
+.doc .admonitionblock {
+  max-width: 860px;
+}
+
+.doc .admonitionblock > table,
+.doc .admonitionblock > table > tbody,
+.doc .admonitionblock tr,
+.doc .admonitionblock td {
+  display: block;
+}
+
+.doc .admonitionblock > table {
+  border-radius: 8px;
+  padding: 14px 18px;
+  background: var(--accent-tint);
+  border: 1px solid var(--accent-border);
+}
+
+.doc .admonitionblock td.icon {
+  margin-bottom: 6px;
+}
+
+.doc .admonitionblock td.icon i {
+  font-style: normal;
+}
+
+.doc .admonitionblock td.icon i::after {
+  content: attr(title);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.doc .admonitionblock td.content {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+.doc .admonitionblock td.content > .title {
+  font-size: 16px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+  margin: -2px 0 6px;
+}
+
+.doc .admonitionblock td.content > * + * {
+  margin-top: 8px;
+}
+
+.doc .admonitionblock.warning > table,
+.doc .admonitionblock.caution > table {
+  background: var(--warn-bg);
+  border-color: var(--warn-border);
+}
+
+.doc .admonitionblock.warning td.icon i::after,
+.doc .admonitionblock.caution td.icon i::after {
+  color: var(--warn-ink);
+}
+
+.doc .admonitionblock.important > table {
+  background: var(--danger-bg);
+  border-color: var(--danger-border);
+}
+
+.doc .admonitionblock.important td.icon i::after {
+  color: var(--danger-ink);
+}
+
+.doc .admonitionblock.has-title td.icon {
+  float: left;
+  margin: 2px 10px 0 0;
+}

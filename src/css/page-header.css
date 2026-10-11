@@ -1,0 +1,139 @@
+.page-header {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.page-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  font-size: 14px;
+}
+
+.breadcrumbs ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  color: var(--ink-3);
+}
+
+.breadcrumbs li {
+  display: flex;
+  gap: 8px;
+}
+
+.breadcrumbs li::after {
+  content: "/";
+}
+
+.breadcrumbs a {
+  color: var(--ink-3);
+}
+
+.page-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.page-actions a {
+  color: var(--ink-2);
+}
+
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.doc h1.page {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 46px;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+}
+
+.lede {
+  margin: 0;
+  max-width: 720px;
+  font-family: var(--serif);
+  font-size: 21px;
+  line-height: 1.45;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+.page-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 13.5px;
+  background: var(--paper-2);
+  border: 1px solid var(--rule-2);
+  color: var(--ink-2);
+}
+
+.chip-code {
+  font-family: var(--mono);
+  background: var(--white);
+  border-color: var(--rule);
+  color: var(--accent);
+  font-weight: 500;
+}
+
+button.chip {
+  cursor: pointer;
+}
+
+button.chip:hover {
+  border-color: var(--accent);
+}
+
+button.chip.is-copied::after {
+  content: "Copied";
+  margin-left: 8px;
+  padding-left: 8px;
+  border-left: 1px solid var(--rule);
+  font-family: var(--sans);
+  font-size: 11px;
+  color: var(--ink-3);
+}
+
+.chip-key {
+  color: var(--ink-3);
+  font-weight: 400;
+}
+
+@media (max-width: 860px) {
+  .doc h1.page {
+    font-size: 36px;
+  }
+
+  .lede {
+    font-size: 18px;
+  }
+
+  .page-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}

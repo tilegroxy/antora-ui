@@ -1,8 +1,17 @@
-<div class="nav-container"{{#if page.component}} data-component="{{page.component.name}}" data-version="{{page.version}}"{{/if}}>
-  <aside class="nav">
-    <div class="panels">
-{{> nav-menu}}
-{{> nav-explore}}
+<aside class="nav" id="nav" aria-label="Site navigation">
+  <div class="nav-scroll">
+    <input class="nav-filter" type="search" placeholder="Filter pages" aria-label="Filter pages">
+{{#with page.navigation}}
+{{#each this}}
+    <div class="nav-group">
+{{#if ./content}}
+      <div class="nav-group-title">{{#if ./url}}<a href="{{{relativize ./url}}}">{{{./content}}}</a>{{else}}{{{./content}}}{{/if}}</div>
+{{/if}}
+{{#if ./items}}
+{{> nav-list items=./items}}
+{{/if}}
     </div>
-  </aside>
-</div>
+{{/each}}
+{{/with}}
+  </div>
+</aside>

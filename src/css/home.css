@@ -1,0 +1,186 @@
+.home .doc {
+  max-width: none;
+  padding: 0;
+}
+
+.home .hero > .content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-auto-flow: row dense;
+  column-gap: 56px;
+  row-gap: 20px;
+  padding: 72px;
+  border-bottom: 1px solid var(--rule);
+  align-items: start;
+}
+
+.home .hero > .content > * {
+  grid-column: 1;
+  margin: 0;
+  max-width: none;
+}
+
+/* the code sample sits beside the eyebrow, heading, lead and actions */
+.home .hero > .content > .listingblock,
+.home .hero > .content > .tabs {
+  grid-column: 2;
+  grid-row: 1 / span 4;
+}
+
+.home .hero .eyebrow p {
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.home .hero h2 {
+  margin: 0;
+  font-size: 54px;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+
+.home .hero .lead p {
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+.home .hero .actions ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.home .hero .actions li {
+  margin: 0;
+}
+
+.home .hero .actions a {
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 18px;
+  border-radius: 7px;
+  font-weight: 600;
+  border: 1px solid var(--rule);
+  background: var(--white);
+  color: var(--ink);
+}
+
+.home .hero .actions li:first-child a {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--white);
+}
+
+.home .hero .actions a:hover {
+  text-decoration: none;
+  filter: brightness(0.96);
+}
+
+.home .paths {
+  margin: 0 !important;
+  max-width: none !important;
+  border-bottom: 1px solid var(--rule);
+}
+
+.home .paths ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.home .paths li {
+  margin: 0;
+  padding: 28px 32px;
+  border-right: 1px solid var(--rule-2);
+  font-size: 15px;
+  color: var(--ink-2);
+}
+
+.home .paths li:last-child {
+  border-right: 0;
+}
+
+.home .paths li a {
+  display: block;
+  margin-bottom: 6px;
+  font-family: var(--serif);
+  font-size: 23px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.home .paths li a::after {
+  content: " →";
+}
+
+.home .sect1 {
+  padding: 56px 72px 72px;
+}
+
+.home .sect1 > h2 {
+  margin-top: 0;
+  font-size: 32px;
+}
+
+.home .features > .content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 36px;
+}
+
+.home .features .ulist {
+  max-width: none;
+  margin: 0;
+}
+
+.home .features .ulist > .title {
+  color: var(--accent);
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 12px;
+}
+
+.home .features ul {
+  list-style: none;
+  padding: 0;
+}
+
+.home .features li {
+  margin: 0;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--rule-2);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+@media (max-width: 1024px) {
+  .home .hero > .content {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 48px 24px;
+  }
+
+  .home .hero > .content > .listingblock,
+  .home .hero > .content > .tabs {
+    grid-column: 1;
+    grid-row: auto !important;
+  }
+
+  .home .paths ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home .sect1 {
+    padding: 40px 24px;
+  }
+}

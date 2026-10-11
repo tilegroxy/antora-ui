@@ -1,2 +1,39 @@
-{{> header-scripts}}
-{{> header-content}}
+<header class="header">
+  <div class="header-inner">
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="nav" aria-expanded="false"><span></span></button>
+    <a class="brand" href="{{{or site.url (or siteRootUrl siteRootPath)}}}">
+      <span class="brand-name">{{site.title}}</span>
+{{#with page.componentVersion}}
+{{#if (and ./displayVersion (ne ./displayVersion '~'))}}
+      <span class="brand-version">{{./displayVersion}}</span>
+{{/if}}
+{{/with}}
+    </a>
+{{#if site.components}}
+    <nav class="manuals" aria-label="Manuals">
+{{#each site.components}}
+      <a class="manual{{#if (eq ./name @root.page.component.name)}} is-current{{/if}}" href="{{{relativize ./url}}}">{{{./title}}}</a>
+{{/each}}
+    </nav>
+{{/if}}
+    <div class="header-search">
+{{#if env.SITE_SEARCH_PROVIDER}}
+      <div id="search-field" class="field search">
+        <input id="search-input" type="search" placeholder="Search docs, options, commands" autocomplete="off">
+        <kbd class="search-kbd">⌘K</kbd>
+      </div>
+{{/if}}
+    </div>
+    <div class="header-links">
+{{#with site.keys.repo_url}}
+      <a href="{{this}}">GitHub</a>
+{{/with}}
+{{#with site.keys.issues_url}}
+      <a href="{{this}}">Issues</a>
+{{/with}}
+{{#with site.keys.releases_url}}
+      <a class="button" href="{{this}}">Get {{@root.site.keys.product_name}}</a>
+{{/with}}
+    </div>
+  </div>
+</header>

@@ -5,7 +5,11 @@
   </head>
   <body class="status-404">
 {{> header}}
-{{> body}}
+<main class="not-found">
+  <div class="eyebrow">404</div>
+  <h1 class="page">Page not found</h1>
+  <p>The page you're looking for doesn't exist or has moved. Try the search above, or start from the <a href="{{{or site.homeUrl (relativize '/')}}}">home page</a>.</p>
+</main>
 {{> footer}}
   </body>
 </html>
