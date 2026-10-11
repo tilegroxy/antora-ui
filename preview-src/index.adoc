@@ -1,5 +1,7 @@
 = Hardware and Software Requirements
 Author Name
+:description: A kitchen sink of AsciiDoc blocks for checking typography, lists, tables and admonitions.
+:page-eyebrow: Reference
 :idprefix:
 :idseparator: -
 :!example-caption:

@@ -7,7 +7,7 @@
   background: var(--white);
   border: 1px solid var(--rule);
   border-radius: 8px;
-  box-shadow: 0 16px 40px -12px rgba(29, 42, 58, 0.3);
+  box-shadow: 0 16px 40px -12px rgb(29 42 58 / 30%);
   max-height: 70vh;
   overflow: auto;
 }

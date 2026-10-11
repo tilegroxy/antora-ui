@@ -26,7 +26,7 @@
   left: 1px;
   right: 1px;
   pointer-events: none;
-  background: rgba(242, 166, 90, 0.12);
+  background: rgb(242 166 90 / 12%);
   box-shadow: inset 3px 0 0 var(--code-ph);
 }
 

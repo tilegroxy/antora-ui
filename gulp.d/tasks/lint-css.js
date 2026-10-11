@@ -1,10 +1,12 @@
 'use strict'
 
-const stylelint = require('gulp-stylelint')
-const vfs = require('vinyl-fs')
+const log = require('fancy-log')
+const PluginError = require('plugin-error')
 
-module.exports = (files) => (done) =>
-  vfs
-    .src(files)
-    .pipe(stylelint({ reporters: [{ formatter: 'string', console: true }], failAfterError: true }))
-    .on('error', done)
+module.exports = (files) => () =>
+  import('stylelint').then(({ default: stylelint }) =>
+    stylelint.lint({ files, formatter: 'string' }).then(({ errored, report }) => {
+      if (report) log(report)
+      if (errored) throw new PluginError('stylelint', 'Failed with errors')
+    })
+  )

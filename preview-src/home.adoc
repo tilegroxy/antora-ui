@@ -1,0 +1,97 @@
+= tilegroxy
+:page-layout: home
+:description: Tilegroxy is a map tile proxy and server.
+
+[.hero]
+--
+[.eyebrow]
+Map tile proxy and server
+
+[discrete]
+== One tile API in front of every map source you use.
+
+[.lead]
+Tilegroxy shines when you consume maps from multiple sources.
+It isn't tied to any one mapping backend and can be configured to proxy, cache and transform tiles from any of them.
+
+[.actions]
+* xref:index.adoc[Quickstart]
+* xref:index.adoc[How to get it]
+
+// HTML output of the @asciidoctor/tabs extension, which requires Asciidoctor.js 2
+++++
+<div id="tabs-1" class="openblock tabs is-sync is-loading">
+<div class="content">
+<div class="ulist tablist">
+<ul>
+<li id="tabs-1-yaml" class="tab">
+<p>YAML</p>
+</li>
+<li id="tabs-1-json" class="tab">
+<p>JSON</p>
+</li>
+</ul>
+</div>
+<div id="tabs-1-yaml--panel" class="tabpanel" aria-labelledby="tabs-1-yaml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">layers:
+  - id: osm
+    provider:
+      name: proxy
+      url: https://tile.openstreetmap.org/{z}/{x}/{y}.png</code></pre>
+</div>
+</div>
+</div>
+<div id="tabs-1-json--panel" class="tabpanel" aria-labelledby="tabs-1-json">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "layers": [
+    {
+      "id": "osm",
+      "provider": {
+        "name": "proxy",
+        "url": "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+      }
+    }
+  ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+++++
+--
+
+[.paths]
+* xref:index.adoc[Quickstart] Proxy tiles from OpenStreetMap with a single-layer config.
+* xref:proxy.adoc[Configuration] Layers, providers, caches, authentication, server and telemetry.
+* xref:index.adoc[Examples] Complete configurations, from a vector basemap to multi-tenant imagery.
+* xref:seed.adoc[Commands] serve, seed, test, and config create / check / diff.
+
+== Features
+
+[.features]
+--
+.Sources
+* Proxy to ZXY, WMS, TMS, WMTS, or other protocol map layers
+* Serve PMTiles archives and PostGIS vector tiles
+* Blend, crop and transform tiles from multiple sources
+
+.Cache
+* Cache tiles in disk, memory, s3, redis, and/or memcached
+* Seed and purge caches ahead of time
+* Per-layer TTLs and cache control headers
+
+.Security
+* Authenticate with static keys, JWT, or custom logic
+* Restrict pattern placeholders with validators
+* Multi-tenant layers and caches
+
+.Operations
+* Hot reload configuration without dropping requests
+* OpenTelemetry traces, metrics and logs
+* Analytics events to ClickHouse or PostgreSQL
+--

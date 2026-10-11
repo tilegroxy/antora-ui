@@ -1,0 +1,38 @@
+= Seed
+:description: A helper command to prepopulate your cache with prerendered tiles.
+:page-eyebrow: Command
+:page-command: tilegroxy seed
+:page-toclevels: 1
+:idprefix:
+:idseparator: -
+
+This is especially useful when adding a new layer that is slow to render the furthest out zoom levels.
+The same command can also remove cached tiles with the `--purge` flag.
+
+== Usage
+
+[,console]
+----
+$ tilegroxy seed -c test_config.yml -l osm -z 2 -z 3 --progress seed_job.json
+$ tilegroxy seed -c test_config.yml -l osm -z 5 --purge
+----
+
+== Flags
+
+[cols="2,1,1,4,1"]
+|===
+|Flag |Type |Default |Description |Group
+
+|`-l, --layer` |string | |The ID of the layer to seed |Target
+|`-z, --zoom` |uint[] | |The zoom level(s) to seed |Target
+|`--cache` |string | |Seed into the cache with this ID instead of the one the layer normally uses |Target
+|`--tenant` |string | |The tenant ID to seed as, standing in for what authentication would supply |Target
+|`-n, --max-latitude` |float32 |90 |The north side of the bounding box |Area
+|`-s, --min-latitude` |float32 |-90 |The south side of the bounding box |Area
+|`-e, --max-longitude` |float32 |180 |The east side of the bounding box |Area
+|`-w, --min-longitude` |float32 |-180 |The west side of the bounding box |Area
+|`-t, --threads` |uint | |How many concurrent requests to use |Execution
+|`--force` |bool |false |Perform the seeding even if it covers more than 10k tiles |Execution
+|`--purge` |bool |false |Delete the cached tiles covering the given area instead of populating them |Execution
+|`-p, --progress` |string | |A file to record progress in, so an interrupted seed can resume |Execution
+|===

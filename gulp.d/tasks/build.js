@@ -5,7 +5,6 @@ const browserify = require('browserify')
 const concat = require('gulp-concat')
 const cssnano = require('cssnano')
 const fs = require('fs-extra')
-const imagemin = require('gulp-imagemin')
 const merge = require('merge-stream')
 const ospath = require('path')
 const path = ospath.posix
@@ -14,7 +13,7 @@ const postcssCalc = require('postcss-calc')
 const postcssImport = require('postcss-import')
 const postcssUrl = require('postcss-url')
 const postcssVar = require('postcss-custom-properties')
-const { Transform } = require('stream')
+const { Readable, Transform } = require('stream')
 const map = (transform) => new Transform({ objectMode: true, transform })
 const through = () => map((file, enc, next) => next(null, file))
 const uglify = require('gulp-uglify')
@@ -36,7 +35,7 @@ module.exports = (src, dest, preview) => () => {
       }),
     postcssUrl([
       {
-        filter: (asset) => new RegExp('^[~][^/]*(?:font|typeface)[^/]*/.*/files/.+[.](?:ttf|woff2?)$').test(asset.url),
+        filter: (asset) => /^[~][^/]*(?:font|typeface)[^/]*\/.*\/files\/.+[.](?:ttf|woff2?)$/.test(asset.url),
         url: (asset) => {
           const relpath = asset.pathname.slice(1)
           const abspath = require.resolve(relpath)
@@ -52,55 +51,62 @@ module.exports = (src, dest, preview) => () => {
     //postcssVar({ importFrom: path.join(src, 'css', 'vars.css'), preserve: preview }),
     preview ? postcssCalc : () => {}, // cssnano already applies postcssCalc
     autoprefixer,
-    preview
-      ? () => {}
-      : (css, result) => cssnano({ preset: 'default' })(css, result).then(() => postcssPseudoElementFixer(css, result)),
+    ...(preview ? [] : [cssnano({ preset: 'default' }), postcssPseudoElementFixer]),
   ]
 
   return merge(
-    vfs.src('ui.yml', { ...opts, allowEmpty: true }),
-    vfs
-      .src('js/+([0-9])-*.js', { ...opts, read: false, sourcemaps })
+    srcIfExists('ui.yml', { ...opts, allowEmpty: true }),
+    srcIfExists('js/+([0-9])-*.js', { ...opts, read: false, sourcemaps })
       .pipe(bundle(opts))
       .pipe(uglify({ output: { comments: /^! / } }))
       // NOTE concat already uses stat from newest combined file
       .pipe(concat('js/site.js')),
-    vfs
-      .src('js/vendor/+([^.])?(.bundle).js', { ...opts, read: false })
+    srcIfExists('js/vendor/+([^.])?(.bundle).js', { ...opts, read: false })
       .pipe(bundle(opts))
       .pipe(uglify({ output: { comments: /^! / } })),
-    vfs
-      .src('js/vendor/*.min.js', opts)
+    srcIfExists('js/vendor/*.min.js', opts)
       .pipe(map((file, enc, next) => next(null, Object.assign(file, { extname: '' }, { extname: '.js' })))),
     // NOTE use the next line to bundle a JavaScript library that cannot be browserified, like jQuery
     //vfs.src(require.resolve('<package-name-or-require-path>'), opts).pipe(concat('js/vendor/<library-name>.js')),
-    vfs
-      .src(['css/site.css', 'css/vendor/*.css'], { ...opts, sourcemaps })
+    srcIfExists(['css/site.css', 'css/vendor/*.css'], { ...opts, sourcemaps })
       .pipe(postcss((file) => ({ plugins: postcssPlugins, options: { file } }))),
-    vfs.src('font/*.{ttf,woff*(2)}', opts),
-    vfs.src('img/**/*.{gif,ico,jpg,png,svg}', opts).pipe(
+    srcIfExists('font/*.{ttf,woff*(2)}', { ...opts, encoding: false }),
+    srcIfExists('img/**/*.{gif,ico,jpg,png,svg}', { ...opts, encoding: false }).pipe(
       preview
         ? through()
-        : imagemin(
+        : imagemin([
+          ['imagemin-gifsicle'],
+          ['imagemin-jpegtran'],
+          ['imagemin-optipng'],
           [
-            imagemin.gifsicle(),
-            imagemin.jpegtran(),
-            imagemin.optipng(),
-            imagemin.svgo({
+            'imagemin-svgo',
+            {
               plugins: [
-                { cleanupIDs: { preservePrefixes: ['icon-', 'view-'] } },
-                { removeViewBox: false },
-                { removeDesc: false },
+                {
+                  name: 'preset-default',
+                  params: { overrides: { cleanupIds: { preservePrefixes: ['icon-', 'view-'] }, removeDesc: false } },
+                },
               ],
-            }),
-          ].reduce((accum, it) => (it ? accum.concat(it) : accum), [])
-        )
+            },
+          ],
+        ])
     ),
-    vfs.src('helpers/*.js', opts),
-    vfs.src('layouts/*.hbs', opts),
-    vfs.src('partials/*.hbs', opts),
-    vfs.src('static/**/*[!~]', { ...opts, base: ospath.join(src, 'static'), dot: true })
+    srcIfExists('helpers/*.js', opts),
+    srcIfExists('layouts/*.hbs', opts),
+    srcIfExists('partials/*.hbs', opts),
+    srcIfExists('static/**/*[!~]', { ...opts, base: ospath.join(src, 'static'), dot: true, encoding: false })
   ).pipe(vfs.dest(dest, { sourcemaps: sourcemaps && '.' }))
+}
+
+// NOTE vinyl-fs 4 fails if the base directory of a glob does not exist, so drop globs for missing (optional) paths;
+// the result is piped through a core stream since merge-stream relies on pipe({ end: false }), which streamx ignores
+function srcIfExists (globs, opts) {
+  globs = [].concat(globs).filter((glob) => {
+    const segments = glob.split('/')
+    const globIdx = segments.findIndex((it) => /[*?{}()[\]!+@]/.test(it))
+    return fs.pathExistsSync(ospath.join(opts.cwd, ...(~globIdx ? segments.slice(0, globIdx) : segments)))
+  })
+  return globs.length ? vfs.src(globs, opts).pipe(through()) : Readable.from([])
 }
 
 function bundle ({ base: basedir, ext: bundleExt = '.bundle.js' }) {
@@ -129,8 +135,26 @@ function bundle ({ base: basedir, ext: bundleExt = '.bundle.js' }) {
   })
 }
 
-function postcssPseudoElementFixer (css, result) {
-  css.walkRules(/(?:^|[^:]):(?:before|after)/, (rule) => {
-    rule.selector = rule.selectors.map((it) => it.replace(/(^|[^:]):(before|after)$/, '$1::$2')).join(',')
+// NOTE imagemin and its plugins are ES modules, so they're imported on first use
+function imagemin (plugins) {
+  let minify
+  return map((file, enc, next) => {
+    minify ??= Promise.all(
+      ['imagemin', ...plugins.map(([name]) => name)].map((name) => import(name).then((m) => m.default))
+    ).then(([{ buffer }, ...factories]) => (contents) =>
+      buffer(contents, { plugins: factories.map((factory, idx) => factory(plugins[idx][1])) })
+    )
+    minify
+      .then((fn) => fn(file.contents))
+      .then((contents) => next(null, Object.assign(file, { contents: Buffer.from(contents) })), next)
   })
+}
+
+const postcssPseudoElementFixer = {
+  postcssPlugin: 'postcss-pseudo-element-fixer',
+  OnceExit (css) {
+    css.walkRules(/(?:^|[^:]):(?:before|after)/, (rule) => {
+      rule.selector = rule.selectors.map((it) => it.replace(/(^|[^:]):(before|after)$/, '$1::$2')).join(',')
+    })
+  },
 }

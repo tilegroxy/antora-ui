@@ -70,7 +70,7 @@
 }
 
 .nav-row:hover {
-  background: rgba(31, 78, 121, 0.06);
+  background: rgb(31 78 121 / 6%);
 }
 
 .nav-link,
@@ -141,7 +141,7 @@
     z-index: 15;
     transform: translateX(-100%);
     transition: transform 0.2s ease;
-    box-shadow: 0 0 40px rgba(29, 42, 58, 0.2);
+    box-shadow: 0 0 40px rgb(29 42 58 / 20%);
   }
 
   .nav.is-open {

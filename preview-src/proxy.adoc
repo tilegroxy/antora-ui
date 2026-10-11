@@ -1,0 +1,125 @@
+= Proxy
+:description: The Proxy provider is the simplest option that simply forwards tile requests to another HTTP(s) endpoint.
+:page-eyebrow: Provider
+:page-config-name: proxy
+:page-tags: ZXY · TMS · WMTS · WMS
+:page-pagination:
+:idprefix:
+:idseparator: -
+
+This provider can be used for mapping services that operate in tiles (ZXY, TMS, or WMTS) or against bounds (i.e. WMS).
+TMS inverts the y coordinate compared to ZXY and WMTS formats, which is handled by the `inverty` parameter.
+
+// HTML output of the @asciidoctor/tabs extension, which requires Asciidoctor.js 2
+++++
+<div id="tabs-1" class="openblock tabs is-sync is-loading">
+<div class="title">Example</div>
+<div class="content">
+<div class="ulist tablist">
+<ul>
+<li id="tabs-1-yaml" class="tab">
+<p>YAML</p>
+</li>
+<li id="tabs-1-json" class="tab">
+<p>JSON</p>
+</li>
+</ul>
+</div>
+<div id="tabs-1-yaml--panel" class="tabpanel" aria-labelledby="tabs-1-yaml">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">provider:
+  name: proxy
+  url: https://tile.openstreetmap.org/{z}/{x}/{y}.png?key={env.key}&amp;agent={ctx.User-Agent}</code></pre>
+</div>
+</div>
+</div>
+<div id="tabs-1-json--panel" class="tabpanel" aria-labelledby="tabs-1-json">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "provider": {
+    "name": "proxy",
+    "url": "https://tile.openstreetmap.org/{z}/{x}/{y}.png?key={env.key}&amp;agent={ctx.User-Agent}"
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+++++
+
+== Configuration
+
+.Configuration options
+[cols="1,3,1,1,1"]
+|===
+|Parameter |Description |Type |Required |Default
+
+|`url`
+|A URL pointing to the tile server.
+Should contain placeholders surrounded by "{}" that are replaced on-the-fly.
+|string
+|Yes
+|None
+
+|`inverty`
+|Changes Y tile numbering to be South-to-North instead of North-to-South.
+Only impacts Y/y placeholder.
+|bool
+|No
+|false
+
+|`srid`
+|What projection bounds should be in.
+Can only be 4326 or 3857.
+|uint
+|No
+|4326
+|===
+
+=== URL placeholders
+
+.URL placeholders
+[cols="1,4"]
+|===
+|Placeholder |Description
+
+|`x, X` |The X tile coordinate from the incoming request
+|`y, Y` |The Y tile coordinate, flipped if `inverty` is set
+|`z, Z` |The Z tile coordinate from the incoming request (aka "zoom")
+|`xmin` |The "west" coordinate of the bounding box, in the projection specified by `srid`
+|`xmax` |The "east" coordinate of the bounding box, in the projection specified by `srid`
+|`ymin` |The "south" coordinate of the bounding box, in the projection specified by `srid`
+|`ymax` |The "north" coordinate of the bounding box, in the projection specified by `srid`
+|`env.XXX` |An environment variable whose name is XXX
+|`ctx.XXX` |A context variable (typically an HTTP header) whose name is XXX
+|`layer.XXX` |The value matched by placeholder XXX in the layer's pattern
+|===
+
+.How placeholder values are escaped
+[NOTE]
+====
+`env.XXX` values are inserted as-is without escaping.
+`ctx.XXX` and `layer.XXX` values come from the incoming request and are percent-encoded before being inserted.
+====
+
+== Example
+
+[,yaml]
+----
+layers:
+  - id: noaa_poststorm
+    pattern: noaa_poststorm_{version} # <1>
+    paramValidator:
+      version: "[0-9]{8}[ab]" # <2>
+    provider:
+      name: proxy
+      url: https://stormscdn.ngs.noaa.gov/{layer.version}-rgb/{z}/{x}/{y} # <3>
+----
+<1> The `\{version}` placeholder matches any flight, so a request for `noaa_poststorm_20230902a` serves that flight.
+<2> The version is part of the upstream URL, so it's restricted to eight digits and a letter.
+<3> `\{layer.version}` is replaced with the value matched by the pattern.
+
+WARNING: Requests for patterns that fail validation are rejected before any upstream request is made.

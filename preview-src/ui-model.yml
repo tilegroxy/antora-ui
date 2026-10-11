@@ -1,68 +1,54 @@
 antoraVersion: '1.0.0'
 site:
   url: http://localhost:5252
-  title: Brand Docs
-  homeUrl: &home_url /xyz/5.2/index.html
+  title: tilegroxy Docs
+  homeUrl: &home_url /operation/home.html
+  keys:
+    product_name: tilegroxy
+    repo_url: https://github.com/Michad/tilegroxy
+    issues_url: https://github.com/Michad/tilegroxy/issues
+    releases_url: https://github.com/Michad/tilegroxy/releases
+    footer_text: 'Copyright© Michael Davis and individual contributors to tilegroxy. Tilegroxy licensed under <a href="http://www.apache.org/licenses/">Apache License, Version 2.0</a>'
   components:
-  - name: abc
-    title: Project ABC
-    url: '#'
-    versions:
-    - &latest_version_abc
-      url: '#'
-      version: '1.1'
-      displayVersion: '1.1'
-    - url: '#'
-      version: '1.0'
-      displayVersion: '1.0'
-    latestVersion: *latest_version_abc
   - &component
-    name: xyz
-    title: &component_title Project XYZ
-    url: /xyz/6.0/index.html
+    name: operation
+    title: &component_title Operation Manual
+    url: *home_url
     versions:
-    - &latest_version_xyz
-      url: /xyz/6.0/index.html
-      version: '6.0'
-      displayVersion: '6.0'
     - &component_version
       title: *component_title
-      url: '#'
-      version: '5.2'
-      displayVersion: '5.2'
-    - url: '#'
-      version: '5.1'
-      displayVersion: '5.1'
-    - url: '#'
-      version: '5.0'
-      displayVersion: '5.0'
-    latestVersion: *latest_version_xyz
-  - name: '123'
-    title: Project 123
+      url: *home_url
+      version: '~'
+      displayVersion: '~'
+    latestVersion: *component_version
+  - name: development
+    title: Developer Manual
     url: '#'
     versions:
-    - &latest_version_123
+    - &latest_version_development
       url: '#'
-      version: '2.2'
-      displayVersion: '2.2'
-    - url: '#'
-      version: '2.1'
-      displayVersion: '2.1'
-    - url: '#'
-      version: '2.0'
-      displayVersion: '2.0'
-    latestVersion: *latest_version_123
+      version: '~'
+      displayVersion: '~'
+    latestVersion: *latest_version_development
+  - name: decisions
+    title: Decision Records
+    url: '#'
+    versions:
+    - &latest_version_decisions
+      url: '#'
+      version: '~'
+      displayVersion: '~'
+    latestVersion: *latest_version_decisions
 page:
-  url: *home_url
-  home: true
-  title: Brand&#8217;s Hardware &amp; Software Requirements
+  url: /operation/index.html
+  title: Hardware and Software Requirements
   component: *component
   componentVersion: *component_version
-  version: '5.2'
-  displayVersion: '5.2'
+  version: '~'
+  displayVersion: '~'
   module: ROOT
   relativeSrcPath: index.adoc
-  editUrl: http://example.com/project-xyz/blob/main/index.adoc
+  editUrl: https://github.com/Michad/tilegroxy/edit/main/docs/index.adoc
   origin:
     private: false
   previous:
@@ -70,57 +56,81 @@ page:
     url: '#'
     urlType: 'internal'
   next:
-    content: Liber Recusabo
-    url: '#'
+    content: Proxy
+    url: /operation/proxy.html
     urlType: 'internal'
   breadcrumbs:
-  - content: Quickstart
+  - content: Reference
     url: '#'
     urlType: fragment
-  - content: Brand&#8217;s Hardware &amp; Software Requirements
-    url: /xyz/5.2/index.html
+  - content: Hardware and Software Requirements
+    url: /operation/index.html
     urlType: internal
-  versions:
-  - version: '6.0'
-    displayVersion: '6.0'
-    url: '#'
-  - version: '5.2'
-    displayVersion: '5.2'
-    url: '#'
-  - version: '5.1'
-    displayVersion: '5.1'
-    url: '#'
-  - version: '5.0'
-    displayVersion: '5.0'
-    missing: true
-    url: '#'
   navigation:
   - root: true
+    content: Get started
     items:
+    - content: Home
+      url: /operation/home.html
+      urlType: internal
     - content: Quickstart
       url: '#'
       urlType: fragment
-      items:
-      - content: Brand&#8217;s Hardware &amp; Software Requirements
-        url: /xyz/5.2/index.html
-        urlType: internal
-      - content: Cu Solet
-        url: '/xyz/5.2/index.html#cu-solet'
-        urlType: internal
-      - content: English + 中文
-        url: '/xyz/5.2/index.html#english+中文'
-        urlType: internal
-    - content: Liber Recusabo
-      url: '#liber-recusabo'
+    - content: Concepts
+      url: '#'
       urlType: fragment
-    - content: Reference
+  - root: true
+    content: Configure
+    items:
+    - content: Configuration
+      url: '#'
+      urlType: fragment
       items:
-      - content: Keyboard Shortcuts
+      - content: Layer
         url: '#'
         urlType: fragment
-      - content: Importing and Exporting
+      - content: Provider
         url: '#'
         urlType: fragment
-      - content: Some Code
-        url: '/xyz/5.2/index.html#some-code'
+        items:
+        - content: Proxy
+          url: /operation/proxy.html
+          urlType: internal
+        - content: Blend
+          url: '#'
+          urlType: fragment
+        - content: Static
+          url: '#'
+          urlType: fragment
+      - content: Cache
+        url: '#'
+        urlType: fragment
+        items:
+        - content: Disk
+          url: '#'
+          urlType: fragment
+        - content: Redis
+          url: '#'
+          urlType: fragment
+  - root: true
+    content: Operate
+    items:
+    - content: Commands
+      url: '#'
+      urlType: fragment
+      items:
+      - content: Serve
+        url: '#'
+        urlType: fragment
+      - content: Seed
+        url: /operation/seed.html
         urlType: internal
+  - root: true
+    content: Reference
+    items:
+    - content: Hardware and Software Requirements
+      url: /operation/index.html
+      urlType: internal
+    - content: English + 中文
+      url: '/operation/index.html#english+中文'
+      urlType: internal

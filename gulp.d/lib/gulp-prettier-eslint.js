@@ -2,7 +2,6 @@
 
 const log = require('fancy-log')
 const PluginError = require('plugin-error')
-const prettierEslint = require('prettier-eslint')
 const { Transform } = require('stream')
 const map = (transform) => new Transform({ objectMode: true, transform })
 
@@ -30,15 +29,16 @@ module.exports = () => {
     if (file.isStream()) return next(new PluginError('gulp-prettier-eslint', 'Streaming not supported'))
 
     const input = file.contents.toString()
-    const output = prettierEslint({ text: input, filePath: file.path })
-
-    if (input === output) {
-      report.unchanged += 1
-    } else {
-      report.changed += 1
-      file.contents = Buffer.from(output)
-    }
-
-    next(null, file)
+    import('prettier-eslint')
+      .then(({ default: prettierEslint }) => prettierEslint({ text: input, filePath: file.path, prettierOptions: { printWidth: 120 } }))
+      .then((output) => {
+        if (input === output) {
+          report.unchanged += 1
+        } else {
+          report.changed += 1
+          file.contents = Buffer.from(output)
+        }
+        next(null, file)
+      }, next)
   }
 }
