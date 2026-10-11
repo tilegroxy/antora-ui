@@ -119,7 +119,16 @@ Split a single list into titled lists:
 == Home page
 
 Set `:page-layout: home` on the component start page and make it the site start page (`site.start_page`).
-The layout is styled by roles: `[.hero]` (containing `[.eyebrow]`, a `[discrete]` heading, `[.lead]`, `[.actions]` and an optional code block or code tabs), `[.paths]` and `[.features]`.
+The layout is styled by roles:
+
+* `[.hero]` contains `[.eyebrow]`, a `[discrete]` heading, `[.lead]` and `[.actions]`, plus a code block or code tabs shown beside them.
+To stack several code samples, wrap them in a sidebar block (`+****+`).
+A list item in `[.actions]` without a link renders as a muted note beside the buttons, such as `Apache-2.0 · Go`.
+* `[.paths]` is a list of cards.
+Each item is a link followed by a description, optionally led by a `[.kicker]#Start#` label.
+* `[.features]` is an open block of titled lists, one column per list.
+
+A block title on code tabs (`.tilegroxy.yml`) is shown as a filename in the tab bar.
 See `preview-src/home.adoc` for a complete example.
 
 == Fonts

@@ -32,7 +32,6 @@ module.exports = (src, previewSrc, previewDest, sink = () => map()) => (done) =>
       for (const component of baseUiModel.site.components) {
         for (const version of component.versions || []) version.asciidoc = asciidoc
       }
-      addTabsAssets(previewDest)
       baseUiModel = { ...baseUiModel, env: process.env }
       delete baseUiModel.asciidoc
       return [baseUiModel, layouts]
@@ -123,17 +122,6 @@ function compileLayouts (src) {
       }
     )
   )
-}
-
-// Emulates a site that uses @asciidoctor/tabs, which provides its stylesheet and script alongside the UI.
-// The extension itself requires Asciidoctor.js 2, so preview pages contain its HTML output as passthrough blocks.
-function addTabsAssets (previewDest) {
-  const uiDest = ospath.join(previewDest, '_')
-  fs.copySync(require.resolve('@asciidoctor/tabs/style'), ospath.join(uiDest, 'css', 'vendor', 'tabs.css'))
-  fs.copySync(require.resolve('@asciidoctor/tabs/script'), ospath.join(uiDest, 'js', 'vendor', 'tabs.js'))
-  const { partials } = handlebars
-  partials['head-styles'] += '    <link rel="stylesheet" href="{{{uiRootPath}}}/css/vendor/tabs.css">\n'
-  partials['footer-scripts'] += '<script async src="{{{uiRootPath}}}/js/vendor/tabs.js"></script>\n'
 }
 
 function copyImages (src, dest) {

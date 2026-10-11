@@ -12,15 +12,19 @@ Map tile proxy and server
 
 [.lead]
 Tilegroxy shines when you consume maps from multiple sources.
-It isn't tied to any one mapping backend and can be configured to proxy, cache and transform tiles from any of them.
+It isn't tied to any one mapping backend and can pull data from any protocol, whether the standard alphabet soup or a proprietary, authenticated API.
 
 [.actions]
 * xref:index.adoc[Quickstart]
 * xref:index.adoc[How to get it]
+* Apache-2.0 · Go
 
+// a sidebar block stacks several code samples beside the text
+****
 // HTML output of the @asciidoctor/tabs extension, which requires Asciidoctor.js 2
 ++++
 <div id="tabs-1" class="openblock tabs is-sync is-loading">
+<div class="title">tilegroxy.yml</div>
 <div class="content">
 <div class="ulist tablist">
 <ul>
@@ -35,7 +39,9 @@ It isn't tied to any one mapping backend and can be configured to proxy, cache a
 <div id="tabs-1-yaml--panel" class="tabpanel" aria-labelledby="tabs-1-yaml">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">layers:
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">server:
+  production: false
+layers:
   - id: osm
     provider:
       name: proxy
@@ -47,6 +53,7 @@ It isn't tied to any one mapping backend and can be configured to proxy, cache a
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
+  "server": { "production": false },
   "layers": [
     {
       "id": "osm",
@@ -63,13 +70,46 @@ It isn't tied to any one mapping backend and can be configured to proxy, cache a
 </div>
 </div>
 ++++
+
+++++
+<div id="tabs-2" class="openblock tabs is-loading">
+<div class="content">
+<div class="ulist tablist">
+<ul>
+<li id="tabs-2-binary" class="tab">
+<p>Binary</p>
+</li>
+<li id="tabs-2-container" class="tab">
+<p>Container</p>
+</li>
+</ul>
+</div>
+<div id="tabs-2-binary--panel" class="tabpanel" aria-labelledby="tabs-2-binary">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">tilegroxy config check
+tilegroxy serve</code></pre>
+</div>
+</div>
+</div>
+<div id="tabs-2-container--panel" class="tabpanel" aria-labelledby="tabs-2-container">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-sh hljs" data-lang="sh">docker run -v ./tilegroxy.yml:/tilegroxy.yml -p 8080:8080 ghcr.io/michad/tilegroxy serve</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+++++
+****
 --
 
 [.paths]
-* xref:index.adoc[Quickstart] Proxy tiles from OpenStreetMap with a single-layer config.
-* xref:proxy.adoc[Configuration] Layers, providers, caches, authentication, server and telemetry.
-* xref:index.adoc[Examples] Complete configurations, from a vector basemap to multi-tenant imagery.
-* xref:seed.adoc[Commands] serve, seed, test, and config create / check / diff.
+* [.kicker]#Start# xref:index.adoc[Quickstart] Proxy tiles from OpenStreetMap with a single-layer config.
+* [.kicker]#Reference# xref:proxy.adoc[Configuration] Layers, providers, caches, authentication, server and telemetry.
+* [.kicker]#Learn by example# xref:index.adoc[Examples] Complete configurations, from a vector basemap to multi-tenant imagery.
+* [.kicker]#CLI# xref:seed.adoc[Commands] serve, seed, test, and config create / check / diff.
 
 == Features
 

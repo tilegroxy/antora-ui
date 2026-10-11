@@ -8,7 +8,7 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   grid-auto-flow: row dense;
   gap: 20px 56px;
-  padding: 72px;
+  padding: 96px 72px;
   border-bottom: 1px solid var(--rule);
   align-items: start;
 }
@@ -19,11 +19,24 @@
   max-width: none;
 }
 
-/* the code sample sits beside the eyebrow, heading, lead and actions */
+/* the code sample sits beside the eyebrow, heading, lead and actions;
+   wrap several samples in a sidebar block (****) to stack them */
 .home .hero > .content > .listingblock,
-.home .hero > .content > .tabs {
+.home .hero > .content > .tabs,
+.home .hero > .content > .sidebarblock {
   grid-column: 2;
   grid-row: 1 / span 4;
+  align-self: center;
+}
+
+.home .hero .sidebarblock > .content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.home .hero .sidebarblock > .content > * {
+  margin: 0;
 }
 
 .home .hero .eyebrow p {
@@ -58,6 +71,16 @@
 
 .home .hero .actions li {
   margin: 0;
+}
+
+/* a list item without a link is a meta note beside the buttons, e.g. Apache-2.0 · Go */
+.home .hero .actions li:not(:has(a)) {
+  display: flex;
+  align-items: center;
+  padding-left: 14px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink-3);
 }
 
 .home .hero .actions a {
@@ -97,9 +120,10 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-.home .paths li {
+.home .paths li,
+.home .paths li + li {
   margin: 0;
-  padding: 28px 32px;
+  padding: 36px 32px;
   border-right: 1px solid var(--rule-2);
   font-size: 15px;
   color: var(--ink-2);
@@ -120,6 +144,16 @@
 
 .home .paths li a::after {
   content: " →";
+}
+
+.home .paths li .kicker {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  font-weight: 600;
 }
 
 .home .sect1 {
@@ -170,7 +204,8 @@
   }
 
   .home .hero > .content > .listingblock,
-  .home .hero > .content > .tabs {
+  .home .hero > .content > .tabs,
+  .home .hero > .content > .sidebarblock {
     grid-column: 1;
     grid-row: auto !important;
   }

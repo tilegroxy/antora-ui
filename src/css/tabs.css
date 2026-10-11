@@ -58,11 +58,22 @@
 
 .doc .tabs.tabs-code .tablist {
   position: relative;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--code-rule);
+  padding: 0 96px 0 4px;
 }
 
 .doc .tabs.tabs-code .tablist > ul {
-  border-bottom: 1px solid var(--code-rule);
-  padding: 0 96px 0 4px;
+  border-bottom: 0;
+}
+
+.doc .tabs.tabs-code .tabs-filename {
+  padding: 0 12px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--code-muted);
+  white-space: nowrap;
 }
 
 .doc .tabs.tabs-code .tablist li.tab {

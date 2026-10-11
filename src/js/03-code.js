@@ -27,6 +27,14 @@
     tabs.classList.add('tabs-code')
     var tablist = tabs.querySelector('.tablist')
     if (!tablist) return
+    // a block title (e.g. .tilegroxy.yml) becomes a filename label at the start of the tab bar
+    var title = tabs.querySelector(':scope > .title')
+    if (title) {
+      var filename = document.createElement('span')
+      filename.className = 'tabs-filename'
+      filename.textContent = title.textContent
+      tablist.insertBefore(filename, tablist.firstChild)
+    }
     var btn = createCopyButton('copy-button tabs-copy')
     btn.addEventListener('click', function () {
       var visible = panels.filter(function (panel) { return !panel.classList.contains('is-hidden') })[0] || panels[0]
