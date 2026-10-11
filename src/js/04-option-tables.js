@@ -188,6 +188,14 @@
     count.className = 'option-count'
     bar.appendChild(input)
     bar.appendChild(count)
+    // lift the caption out of the table so it sits above the filter bar
+    if (table.caption) {
+      var title = document.createElement('div')
+      title.className = 'title'
+      title.textContent = table.caption.textContent.trim()
+      table.parentNode.insertBefore(title, table)
+      table.removeChild(table.caption)
+    }
     table.parentNode.insertBefore(bar, table)
     input.addEventListener('input', function () {
       var q = input.value.trim().toLowerCase()

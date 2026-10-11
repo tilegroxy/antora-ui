@@ -4,14 +4,14 @@
     <a class="brand" href="{{{or site.url (or siteRootUrl siteRootPath)}}}">
       <span class="brand-name">{{site.title}}</span>
 {{#with page.componentVersion}}
-{{#if (and ./displayVersion (ne ./displayVersion '~'))}}
+{{#if (and ./version (ne ./version '~'))}}
       <span class="brand-version">{{./displayVersion}}</span>
 {{/if}}
 {{/with}}
     </a>
 {{#if site.components}}
     <nav class="manuals" aria-label="Manuals">
-{{#each site.components}}
+{{#each (manuals)}}
       <a class="manual{{#if (eq ./name @root.page.component.name)}} is-current{{/if}}" href="{{{relativize ./url}}}">{{{./title}}}</a>
 {{/each}}
     </nav>
@@ -25,14 +25,16 @@
 {{/if}}
     </div>
     <div class="header-links">
-{{#with site.keys.repo_url}}
-      <a href="{{this}}">GitHub</a>
-{{/with}}
-{{#with site.keys.issues_url}}
-      <a href="{{this}}">Issues</a>
-{{/with}}
-{{#with site.keys.releases_url}}
-      <a class="button" href="{{this}}">Get {{@root.site.keys.product_name}}</a>
+{{#with (repoLinks)}}
+{{#if ./repo}}
+      <a href="{{./repo}}">{{./repoLabel}}</a>
+{{/if}}
+{{#if ./issues}}
+      <a href="{{./issues}}">Issues</a>
+{{/if}}
+{{#if ./releases}}
+      <a class="button" href="{{./releases}}">Get {{./product}}</a>
+{{/if}}
 {{/with}}
     </div>
   </div>

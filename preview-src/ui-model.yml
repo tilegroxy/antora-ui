@@ -4,11 +4,12 @@ site:
   title: tilegroxy Docs
   homeUrl: &home_url /operation/home.html
   keys:
-    product_name: tilegroxy
-    repo_url: https://github.com/Michad/tilegroxy
-    issues_url: https://github.com/Michad/tilegroxy/issues
-    releases_url: https://github.com/Michad/tilegroxy/releases
-    footer_text: 'Copyright© Michael Davis and individual contributors to tilegroxy. Tilegroxy licensed under <a href="http://www.apache.org/licenses/">Apache License, Version 2.0</a>'
+    productName: tilegroxy
+    repoUrl: https://github.com/Michad/tilegroxy
+    issuesUrl: https://github.com/Michad/tilegroxy/issues
+    releasesUrl: https://github.com/Michad/tilegroxy/releases
+    manualOrder: operation, development, decisions
+    footerText: 'Copyright© Michael Davis and individual contributors to tilegroxy. Tilegroxy licensed under <a href="http://www.apache.org/licenses/">Apache License, Version 2.0</a>'
   components:
   - &component
     name: operation

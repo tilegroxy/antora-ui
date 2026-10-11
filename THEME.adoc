@@ -10,12 +10,17 @@ This page describes what the theme expects from the playbook and the content.
 ----
 site:
   title: tilegroxy Docs
+  start_page: operation::index.adoc
   keys:
-    product_name: tilegroxy
-    repo_url: https://github.com/Michad/tilegroxy
-    issues_url: https://github.com/Michad/tilegroxy/issues
-    releases_url: https://github.com/Michad/tilegroxy/releases
+    manual_order: operation, development, decisions
     footer_text: 'Copyright© Michael Davis and individual contributors to tilegroxy. Tilegroxy licensed under <a href="http://www.apache.org/licenses/">Apache License, Version 2.0</a>'
+content:
+  edit_url: '{web_url}/edit/main/{path}'
+  sources:
+  - url: .
+    branches: HEAD
+    start_path: docs/operation
+  # ...
 ui:
   bundle:
     url: ./ui-bundle.zip
@@ -28,16 +33,23 @@ asciidoc:
   - '@asciidoctor/tabs'
 ----
 
-The header links (GitHub, Issues, Get tilegroxy) and the footer copyright come from `site.keys`.
-Each link is omitted when its key isn't set, and the footer falls back to `© <year> <site title>`.
-`site.keys.googleAnalytics` still enables Google Analytics.
+The header links (GitHub, Issues, Get tilegroxy) and the "Report an issue" link are derived from the content source's git remote when it's on GitHub or GitLab.
+To override them, set `repo_url`, `issues_url`, `releases_url` and `product_name` under `site.keys`.
+`manual_order` orders the manuals in the header by component name; without it, the start page's component comes first and the rest are sorted by title.
+The footer falls back to `© <year> <site title>` when `footer_text` isn't set.
+`site.keys.google_analytics` still enables Google Analytics.
+
+NOTE: Antora camelCases `site.keys`, so templates read `site.keys.repoUrl` for `repo_url`.
+
+"Edit this page" appears only when the page has a web edit URL.
+A local source (`url: .`) gets a `file:` edit URL unless `edit_url` is set, and `edit_url: ~` turns it off.
 
 The UI provides the `#search-input` field and the `search-scripts` partial hook the lunr extension expects.
-The UI restyles the output of the tabs extension, but doesn't ship its stylesheet or script.
-The site must provide those, as it does today.
+The UI styles the output of the tabs extension and ships its script (`js/vendor/tabs.js`, from `@asciidoctor/tabs`), so the site doesn't need to supply either.
 
-If a `supplemental_ui` folder adds `table-filter.js`/`.css`, remove it.
-Filtering is built into the UI.
+Don't override `head-styles.hbs` or `footer-scripts.hbs` with `supplemental_files`.
+Doing so drops the fonts and the tabs script.
+Remove any `table-filter.js`/`.css` supplemental files, since filtering is built into the UI.
 
 == What the UI does automatically
 
@@ -77,7 +89,7 @@ The sidebar has a "Filter pages" box and expands only the current branch.
 |Attribute |Renders
 
 |`:description:` |Lede under the title (also the meta description)
-|`:page-eyebrow:` |Small label above the title
+|`:page-eyebrow:` |Small label above the title (defaults to the parent nav entry, `none` hides it)
 |`:page-config-name:` |Copyable `name: proxy` chip
 |`:page-config-key:` |`key: layers[]` chip
 |`:page-command:` |Copyable `$ tilegroxy seed` chip

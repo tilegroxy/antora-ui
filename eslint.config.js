@@ -3,6 +3,8 @@
 const neostandard = require('neostandard')
 
 module.exports = [
+  // third-party script copied verbatim from @asciidoctor/tabs
+  { ignores: ['src/js/vendor/tabs.js'] },
   ...neostandard({ env: ['browser'], noJsx: true }),
   {
     rules: {

@@ -7,12 +7,14 @@
       <a href="{{{this}}}">Edit this page</a>
 {{/unless}}
 {{/with}}
-{{#with site.keys.issues_url}}
-      <a href="{{this}}">Report an issue</a>
+{{#with (repoLinks)}}
+{{#if ./issues}}
+      <a href="{{./issues}}">Report an issue</a>
+{{/if}}
 {{/with}}
     </div>
   </div>
-{{#with page.attributes.eyebrow}}
+{{#with (eyebrow)}}
   <div class="eyebrow">{{this}}</div>
 {{/with}}
 {{#with page.title}}
