@@ -37,3 +37,8 @@ pre {
 [hidden] {
   display: none !important;
 }
+
+ul.checklist { 
+  list-style: none; 
+  padding-left: 0 
+}
