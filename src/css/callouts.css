@@ -1,3 +1,12 @@
+/* code + callouts break out of the text column, centred on it; tabs holding them widen with them */
+.doc .annotated,
+.doc .tabs:has(.annotated) {
+  --annotated-w: min(var(--doc-wide-w), 100cqi);
+
+  width: var(--annotated-w);
+  margin-left: calc((100% - var(--annotated-w)) / 2);
+}
+
 .doc .annotated {
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
@@ -93,6 +102,12 @@
 }
 
 @media (max-width: 1024px) {
+  .doc .annotated,
+  .doc .tabs:has(.annotated) {
+    width: auto;
+    margin-left: 0;
+  }
+
   .doc .annotated {
     grid-template-columns: minmax(0, 1fr);
   }

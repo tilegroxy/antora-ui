@@ -23,6 +23,15 @@
 
 .main > .content > .doc {
   padding-top: 0;
+  max-width: none;
+  container-type: inline-size;
+}
+
+/* centre the text column; two-column blocks break out wider (see callouts.css) */
+.main > .content > .doc > * {
+  max-width: var(--doc-w);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (max-width: 1200px) {

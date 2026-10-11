@@ -1,3 +1,8 @@
+/* the tablist is rendered as div.tablist.ulist; don't let the list measure cap it */
+.doc .tabs .tablist {
+  max-width: none;
+}
+
 .doc .tabs .tablist > ul {
   list-style: none;
   margin: 0;
