@@ -14,15 +14,17 @@
   align-items: start;
 }
 
-.doc .annotated > .listingblock {
-  position: sticky;
-  top: calc(var(--header-h) + 16px);
+.doc .annotated > * {
   margin: 0;
   min-width: 0;
 }
 
+/* whichever column is shorter rides along with the longer one (JS adjusts top for tall columns) */
+.doc .annotated > .listingblock,
+.doc .annotated > .tabs,
 .doc .annotated > .colist {
-  margin: 0;
+  position: sticky;
+  top: calc(var(--header-h) + 16px);
 }
 
 .doc .annotated .listingblock .content,
@@ -112,7 +114,9 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .doc .annotated > .listingblock {
+  .doc .annotated > .listingblock,
+  .doc .annotated > .tabs,
+  .doc .annotated > .colist {
     position: static;
   }
 }
