@@ -131,6 +131,22 @@ Each item is a link followed by a description, optionally led by a `[.kicker]#St
 A block title on code tabs (`.tilegroxy.yml`) is shown as a filename in the tab bar.
 See `preview-src/home.adoc` for a complete example.
 
+== Release metadata
+
+Add the `release` role to a description list to show it as a row of labelled facts, such as the date and links under a version heading.
+It falls back to a stacked list below 640px.
+
+[,asciidoc]
+----
+[.release]
+Released:: October 2026
+Risk:: [.risk.medium]#Medium#
+Release notes:: link:https://example.com[v0.13.0]
+----
+
+`[.risk.low]#Low#`, `[.risk.medium]#Medium#` and `[.risk.high]#High#` render as green, amber and red pills anywhere inline.
+Add the `risk-levels` role to a description list whose terms are those pills to lay it out as a legend.
+
 == Fonts
 
 `head-styles.hbs` loads Source Serif 4, Source Sans 3 and Source Code Pro from Google Fonts.

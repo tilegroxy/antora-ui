@@ -343,6 +343,19 @@ The fog comes
 on little cat feet.
 ____
 
+== Release metadata
+
+[.release]
+Released:: October 2026
+Risk:: [.risk.medium]#Medium#
+Commits:: https://example.com[81]
+Release notes:: https://example.com[v0.13.0 on GitHub]
+
+[.risk-levels]
+[.risk.low]#Low#:: Nothing to change
+[.risk.medium]#Medium#:: Affects specific features
+[.risk.high]#High#:: Likely to affect most deployments
+
 == Fin
 
 That's all, folks!

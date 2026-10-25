@@ -182,3 +182,8 @@
 .doc .imageblock .title {
   margin: 8px 0 0;
 }
+
+.doc li > .ulist,
+.doc li > .olist {
+  margin-top: 6px;
+}
