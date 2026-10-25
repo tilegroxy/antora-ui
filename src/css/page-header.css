@@ -1,7 +1,15 @@
+.page-chrome,
 .page-header {
   display: flex;
   flex-direction: column;
   gap: 14px;
+}
+
+.page-chrome {
+  margin-bottom: 14px;
+}
+
+.page-header {
   margin-bottom: 8px;
 }
 
@@ -19,21 +27,33 @@
   padding: 0;
   display: flex;
   flex-wrap: wrap;
+  align-items: baseline;
   gap: 8px;
   color: var(--ink-3);
 }
 
 .breadcrumbs li {
   display: flex;
+  align-items: baseline;
   gap: 8px;
 }
 
-.breadcrumbs li::after {
+/* the separator leads each item, so it wraps with the item rather than dangling */
+.breadcrumbs li:not(:first-child)::before {
   content: "/";
+  color: var(--ink-3);
+  font-size: 14px;
+  letter-spacing: normal;
+  font-weight: 400;
 }
 
 .breadcrumbs a {
   color: var(--ink-3);
+}
+
+/* the eyebrow ends the trail (see breadcrumbTrail.js) */
+.breadcrumbs li.eyebrow a {
+  color: inherit;
 }
 
 .page-actions {
@@ -43,6 +63,11 @@
 
 .page-actions a {
   color: var(--ink-2);
+}
+
+/* on narrow screens the actions move below the article */
+.page-actions-end {
+  display: none;
 }
 
 .eyebrow {
@@ -131,9 +156,19 @@ button.chip.is-copied::after {
     font-size: 18px;
   }
 
-  .page-toolbar {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
+  .page-toolbar > .page-actions {
+    display: none;
+  }
+
+  .page-actions-end {
+    display: flex;
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule-2);
+    font-size: 14px;
+  }
+
+  .page-actions-end + .pagination {
+    margin-top: 24px;
   }
 }

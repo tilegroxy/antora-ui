@@ -15,7 +15,8 @@
     if (h.closest('.page-header') || h.closest('.hero') || h.closest('.admonitionblock')) return false
     return h.offsetParent !== null
   })
-  if (!headings.length) return toc.classList.add('is-empty')
+  // a contents list of one or two entries isn't worth the panel
+  if (headings.length < 3) return toc.classList.add('is-empty')
 
   var list = document.createElement('ul')
   var lastItem

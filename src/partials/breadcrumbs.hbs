@@ -1,12 +1,7 @@
 <nav class="breadcrumbs" aria-label="Breadcrumbs">
   <ul>
-{{#with page.componentVersion}}
-    <li><a href="{{{relativize ./url}}}">{{{./title}}}</a></li>
-{{/with}}
-{{#each page.breadcrumbs}}
-{{#unless @last}}
-    <li>{{#if ./url}}<a href="{{{relativize ./url}}}">{{{./content}}}</a>{{else}}<span>{{{./content}}}</span>{{/if}}</li>
-{{/unless}}
+{{#each (breadcrumbTrail (eyebrow))}}
+    <li{{#if ./eyebrow}} class="eyebrow"{{/if}}>{{#if ./text}}<span>{{./text}}</span>{{else if ./url}}<a href="{{{relativize ./url}}}">{{{./content}}}</a>{{else}}<span>{{{./content}}}</span>{{/if}}</li>
 {{/each}}
   </ul>
 </nav>

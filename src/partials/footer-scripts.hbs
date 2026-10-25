@@ -2,5 +2,6 @@
 <script async src="{{{uiRootPath}}}/js/vendor/highlight.js"></script>
 <script async src="{{{uiRootPath}}}/js/vendor/tabs.js" data-sync-storage-key="preferred-tab"></script>
 {{#if env.SITE_SEARCH_PROVIDER}}
+<script id="search-trails" type="application/json">{{{searchTrails}}}</script>
 {{> search-scripts}}
 {{/if}}

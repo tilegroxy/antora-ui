@@ -1,3 +1,18 @@
+/* tables are wrapped (see 04-option-tables.js) so wide ones scroll instead of widening the page */
+.doc .table-scroll {
+  margin-top: 16px;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.doc > .table-scroll {
+  margin-top: 28px;
+}
+
+.doc .table-scroll > table.tableblock {
+  margin-top: 0;
+}
+
 .doc table.tableblock {
   width: 100%;
   border-collapse: separate;
@@ -37,4 +52,18 @@
 
 .doc table.tableblock p.tableblock + p.tableblock {
   margin-top: 6px;
+}
+
+@media (max-width: 640px) {
+  /* keep columns readable on phones; the wrapper scrolls if they don't fit */
+  .doc table.tableblock th,
+  .doc table.tableblock td {
+    min-width: 7em;
+    padding: 8px 10px;
+  }
+
+  /* size columns to fit identifiers rather than breaking them mid-word */
+  .doc table.tableblock code {
+    overflow-wrap: break-word;
+  }
 }

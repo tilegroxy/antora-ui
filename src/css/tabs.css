@@ -101,6 +101,13 @@
   border-radius: 0;
 }
 
+.doc .tabs.tabs-code .pre-scroll::after {
+  top: 0;
+  right: 0;
+  bottom: var(--scrollbar-h, 0);
+  border-radius: 0 0 7px;
+}
+
 .doc .tabs.tabs-code .source-toolbox {
   display: none;
 }

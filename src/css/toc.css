@@ -50,6 +50,10 @@
   border-left-color: var(--accent);
 }
 
+.toc.is-empty {
+  border-left-color: transparent;
+}
+
 .toc.is-empty .toc-inner {
   display: none;
 }

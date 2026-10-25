@@ -1,22 +1,4 @@
 <header class="page-header">
-  <div class="page-toolbar">
-{{> breadcrumbs}}
-    <div class="page-actions">
-{{#with page.editUrl}}
-{{#unless (startsWith this 'file:')}}
-      <a href="{{{this}}}">Edit this page</a>
-{{/unless}}
-{{/with}}
-{{#with (repoLinks)}}
-{{#if ./issues}}
-      <a href="{{./issues}}">Report an issue</a>
-{{/if}}
-{{/with}}
-    </div>
-  </div>
-{{#with (eyebrow)}}
-  <div class="eyebrow">{{this}}</div>
-{{/with}}
 {{#with page.title}}
   <h1 class="page">{{{this}}}</h1>
 {{/with}}
@@ -26,13 +8,13 @@
 {{#if (or page.attributes.config-name page.attributes.config-key page.attributes.command page.attributes.tags)}}
   <div class="page-chips">
 {{#with page.attributes.config-name}}
-    <button class="chip chip-code" data-copy="name: {{this}}" title="Copy"><span class="chip-key">name: </span>{{this}}</button>
+    <button class="chip chip-code" data-copy="name: {{this}}" title="Copy"><span class="chip-key">name:&nbsp;</span>{{this}}</button>
 {{/with}}
 {{#with page.attributes.config-key}}
-    <span class="chip chip-code"><span class="chip-key">key: </span>{{this}}</span>
+    <span class="chip chip-code"><span class="chip-key">key:&nbsp;</span>{{this}}</span>
 {{/with}}
 {{#with page.attributes.command}}
-    <button class="chip chip-code" data-copy="{{this}}" title="Copy"><span class="chip-key">$ </span>{{this}}</button>
+    <button class="chip chip-code" data-copy="{{this}}" title="Copy"><span class="chip-key">$&nbsp;</span>{{this}}</button>
 {{/with}}
 {{#each (split page.attributes.tags)}}
     <span class="chip">{{this}}</span>

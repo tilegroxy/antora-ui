@@ -170,6 +170,17 @@
   height: auto;
 }
 
+.doc .videoblock iframe,
+.doc .videoblock video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.doc .videoblock iframe {
+  aspect-ratio: 16 / 9;
+}
+
 .doc .imageblock .content {
   background: var(--paper-2);
   border: 1px solid var(--rule-2);

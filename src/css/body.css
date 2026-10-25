@@ -21,14 +21,21 @@
   padding: 28px 56px 72px;
 }
 
-.main > .content > .doc {
-  padding-top: 0;
-  max-width: none;
+/* breadcrumbs and page actions sit outside article.doc so the search index skips them */
+.doc-column {
+  min-width: 0;
+  padding: 0 56px 72px;
   container-type: inline-size;
 }
 
+.doc-column > .doc {
+  padding: 0;
+  max-width: none;
+}
+
 /* centre the text column; two-column blocks break out wider (see callouts.css) */
-.main > .content > .doc > * {
+.content > .doc-column > :not(.doc),
+.content > .doc-column > .doc > * {
   max-width: var(--doc-w);
   margin-left: auto;
   margin-right: auto;
@@ -47,5 +54,9 @@
 
   .doc {
     padding: 20px 20px 56px;
+  }
+
+  .doc-column {
+    padding: 0 20px 56px;
   }
 }

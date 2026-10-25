@@ -209,6 +209,14 @@
     })
   })
 
+  // ---------- Wide tables scroll inside their own box ----------
+  find('table.tableblock', doc).forEach(function (table) {
+    var wrap = document.createElement('div')
+    wrap.className = 'table-scroll'
+    table.parentNode.insertBefore(wrap, table)
+    wrap.appendChild(table)
+  })
+
   function slug (str) {
     return str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
   }

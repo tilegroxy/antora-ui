@@ -1,0 +1,12 @@
+<div class="page-actions{{#if class}} {{class}}{{/if}}">
+{{#with page.editUrl}}
+{{#unless (startsWith this 'file:')}}
+  <a href="{{{this}}}">Edit this page</a>
+{{/unless}}
+{{/with}}
+{{#with (repoLinks)}}
+{{#if ./issues}}
+  <a href="{{./issues}}">Report an issue</a>
+{{/if}}
+{{/with}}
+</div>

@@ -1,10 +1,14 @@
 <main class="main">
   <div class="content">
-    <article class="doc">
+    <div class="doc-column">
+{{> page-chrome}}
+      <article class="doc">
 {{> page-header}}
 {{{page.contents}}}
+      </article>
+{{> page-actions class='page-actions-end'}}
 {{> pagination}}
-    </article>
+    </div>
 {{> toc}}
   </div>
 </main>

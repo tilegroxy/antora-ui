@@ -67,6 +67,30 @@
     block.classList.add('has-toolbox')
   })
 
+  // ---------- Fade the right edge while long lines run off it ----------
+  find('pre', doc).forEach(function (pre) {
+    var wrap = document.createElement('div')
+    wrap.className = 'pre-scroll'
+    pre.parentNode.insertBefore(wrap, pre)
+    wrap.appendChild(pre)
+    var clip = function () {
+      wrap.classList.toggle('is-clipped', pre.scrollWidth - pre.clientWidth - pre.scrollLeft > 1)
+    }
+    var measure = function () {
+      // keep the fade off a classic (non-overlay) horizontal scrollbar
+      var style = window.getComputedStyle(pre)
+      var bar = pre.offsetHeight - pre.clientHeight -
+        parseFloat(style.borderTopWidth) - parseFloat(style.borderBottomWidth)
+      wrap.style.setProperty('--scrollbar-h', Math.max(bar, 0) + 'px')
+      clip()
+    }
+    pre.addEventListener('scroll', clip, { passive: true })
+    if (window.ResizeObserver) new window.ResizeObserver(measure).observe(pre)
+    window.addEventListener('load', measure)
+    if (document.fonts) document.fonts.ready.then(measure)
+    measure()
+  })
+
   // ---------- {placeholders} (after highlight.js has run) ----------
   window.addEventListener('load', function () {
     find('pre code', doc).forEach(function (code) {

@@ -16,6 +16,33 @@
   tab-size: 2;
 }
 
+/* fade on the right edge while long lines are scrolled out of view (see 03-code.js) */
+.doc .pre-scroll {
+  position: relative;
+}
+
+.doc .pre-scroll::after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  bottom: calc(1px + var(--scrollbar-h, 0px));
+  width: 56px;
+  border-radius: 0 7px 7px 0;
+  background: linear-gradient(to right, transparent, var(--code-bg) 85%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.doc .pre-scroll.is-clipped::after {
+  opacity: 1;
+}
+
+.doc .listingblock.has-toolbox .pre-scroll::after {
+  border-top-right-radius: 0;
+}
+
 .doc pre code {
   background: none;
   border: 0;

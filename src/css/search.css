@@ -53,3 +53,25 @@
   color: var(--ink);
   font-weight: 600;
 }
+
+/* left column: the page's nav trail (see 08-search-results.js) */
+.search-result-dropdown-menu .search-result-document-title {
+  cursor: pointer;
+  line-height: 1.35;
+}
+
+.search-result-dropdown-menu .search-result-crumb {
+  color: var(--ink-3);
+  font-weight: 400;
+}
+
+.search-result-dropdown-menu .search-result-crumb::after {
+  content: " / ";
+  color: var(--rule);
+}
+
+.search-result-dropdown-menu .search-result-section::before {
+  content: " › ";
+  color: var(--ink-3);
+  font-weight: 400;
+}

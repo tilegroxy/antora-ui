@@ -301,6 +301,32 @@ Eu mea inani iriure.
 [discrete]
 == Voluptua singulis
 
+.Choosing a provider
+|===
+|Provider |Use when |Upstream |Auth |Caching |Example
+
+|`url_template`
+|You have a plain XYZ or WMS endpoint
+|HTTP
+|None or static header
+|Yes
+|`https://tile.example.com/{z}/{x}/{y}.png`
+
+|`proxy`
+|The upstream needs dynamic URLs or query params
+|HTTP
+|Header, query or `env`
+|Yes
+|`https://maps.example.com/wms?bbox=$xmin,$ymin,$xmax,$ymax`
+
+|`custom`
+|Nothing else fits and you can write a plugin
+|Anything
+|Anything
+|Optional
+|`custom.go`
+|===
+
 [discrete]
 === Nominavi luptatum
 

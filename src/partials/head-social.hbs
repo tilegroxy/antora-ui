@@ -1,0 +1,23 @@
+{{#with (socialMeta)}}
+{{#if ./siteName}}
+    <meta property="og:site_name" content="{{./siteName}}">
+{{/if}}
+    <meta property="og:type" content="{{./type}}">
+    <meta property="og:title" content="{{./title}}">
+{{#if ./description}}
+    <meta property="og:description" content="{{./description}}">
+{{/if}}
+{{#if ./url}}
+    <meta property="og:url" content="{{./url}}">
+{{/if}}
+{{#if ./image}}
+    <meta property="og:image" content="{{./image}}">
+{{#if ./imageAlt}}
+    <meta property="og:image:alt" content="{{./imageAlt}}">
+{{/if}}
+{{/if}}
+    <meta name="twitter:card" content="{{./card}}">
+{{#if ./twitterSite}}
+    <meta name="twitter:site" content="{{./twitterSite}}">
+{{/if}}
+{{/with}}
