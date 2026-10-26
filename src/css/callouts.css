@@ -63,7 +63,7 @@
 }
 
 .doc .colist tr.is-active td {
-  background: var(--white);
+  background: var(--surface);
 }
 
 .doc .colist tr.is-active td:first-child {

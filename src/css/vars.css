@@ -1,8 +1,15 @@
 :root {
+  color-scheme: light;
+
   --paper: #fbf8f1;
   --paper-2: #f4efe4;
   --paper-3: #e9e2d1;
   --white: #fff;
+  --surface: #fff;
+  --on-accent: #fff;
+  --hover: rgb(31 78 121 / 6%);
+  --mark-bg: mark;
+  --mark-ink: marktext;
   --ink: #1d2a3a;
   --ink-2: #44505f;
   --ink-3: #6c7380;
@@ -41,4 +48,83 @@
   --toc-w: 224px;
   --doc-w: 720px;
   --doc-wide-w: 1040px;
+}
+
+/* dark palette: follows the OS unless the reader picked a theme via html[data-theme] */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --paper: #131920;
+    --paper-2: #19212a;
+    --paper-3: #222c37;
+    --surface: #1a222c;
+    --on-accent: #0f151c;
+    --hover: rgb(143 184 224 / 8%);
+    --mark-bg: rgb(233 191 109 / 28%);
+    --mark-ink: var(--ink);
+    --ink: #e6e0d2;
+    --ink-2: #bab4a7;
+    --ink-3: #8f95a0;
+    --rule: #343e4b;
+    --rule-2: #28313c;
+    --accent: #8fb8e0;
+    --accent-deep: #b6d1ec;
+    --accent-tint: #1d2c3d;
+    --accent-border: #2e4761;
+    --required: #e3775c;
+    --ok-ink: #a9d19b;
+    --ok-bg: #1b281c;
+    --ok-border: #355031;
+    --warn-ink: #e9bf6d;
+    --warn-bg: #2b2315;
+    --warn-border: #594522;
+    --danger-ink: #f0a28c;
+    --danger-bg: #2f1b16;
+    --danger-border: #5e3427;
+    --type-ink: #e2b58e;
+    --type-bg: #2c231b;
+    --code-bg: #0e141c;
+    --code-border: #27323f;
+    --code-rule: #283444;
+    --code-line: #1b293a;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --paper: #131920;
+  --paper-2: #19212a;
+  --paper-3: #222c37;
+  --surface: #1a222c;
+  --on-accent: #0f151c;
+  --hover: rgb(143 184 224 / 8%);
+  --mark-bg: rgb(233 191 109 / 28%);
+  --mark-ink: var(--ink);
+  --ink: #e6e0d2;
+  --ink-2: #bab4a7;
+  --ink-3: #8f95a0;
+  --rule: #343e4b;
+  --rule-2: #28313c;
+  --accent: #8fb8e0;
+  --accent-deep: #b6d1ec;
+  --accent-tint: #1d2c3d;
+  --accent-border: #2e4761;
+  --required: #e3775c;
+  --ok-ink: #a9d19b;
+  --ok-bg: #1b281c;
+  --ok-border: #355031;
+  --warn-ink: #e9bf6d;
+  --warn-bg: #2b2315;
+  --warn-border: #594522;
+  --danger-ink: #f0a28c;
+  --danger-bg: #2f1b16;
+  --danger-border: #5e3427;
+  --type-ink: #e2b58e;
+  --type-bg: #2c231b;
+  --code-bg: #0e141c;
+  --code-border: #27323f;
+  --code-rule: #283444;
+  --code-line: #1b293a;
 }

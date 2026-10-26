@@ -42,3 +42,8 @@ ul.checklist {
   list-style: none; 
   padding-left: 0 
 }
+
+mark {
+  background: var(--mark-bg);
+  color: var(--mark-ink);
+}

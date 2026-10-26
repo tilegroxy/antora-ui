@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   z-index: 30;
-  background: var(--white);
+  background: var(--surface);
   border: 1px solid var(--rule);
   border-radius: 8px;
   box-shadow: 0 16px 40px -12px rgb(29 42 58 / 30%);

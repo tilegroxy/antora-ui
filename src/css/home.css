@@ -39,6 +39,59 @@
   margin: 0;
 }
 
+/* logo beside the eyebrow and product name, as in the social preview image */
+.home .hero .masthead {
+  margin: 0;
+}
+
+.home .hero .masthead > .content {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 28px;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.home .hero .masthead .imageblock {
+  grid-row: 1 / span 2;
+  margin: 0;
+}
+
+.home .hero .masthead .imageblock .content {
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.home .hero .masthead .imageblock img {
+  display: block;
+  width: 128px;
+  height: 128px;
+}
+
+.home .hero .masthead .paragraph {
+  margin: 0;
+}
+
+.home .hero .masthead .eyebrow {
+  align-self: end;
+}
+
+.home .hero .masthead .name {
+  align-self: start;
+}
+
+.home .hero .masthead .name p {
+  font-family: var(--serif);
+  font-size: 76px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  color: var(--ink);
+}
+
 .home .hero .eyebrow p {
   font-size: 12px;
   letter-spacing: 0.16em;
@@ -49,8 +102,8 @@
 
 .home .hero h2 {
   margin: 0;
-  font-size: 54px;
-  line-height: 1.02;
+  font-size: 36px;
+  line-height: 1.2;
   letter-spacing: -0.02em;
   font-weight: 500;
 }
@@ -91,14 +144,14 @@
   border-radius: 7px;
   font-weight: 600;
   border: 1px solid var(--rule);
-  background: var(--white);
+  background: var(--surface);
   color: var(--ink);
 }
 
 .home .hero .actions li:first-child a {
   background: var(--accent);
   border-color: var(--accent);
-  color: var(--white);
+  color: var(--on-accent);
 }
 
 .home .hero .actions a:hover {
@@ -208,6 +261,15 @@
   .home .hero > .content > .sidebarblock {
     grid-column: 1;
     grid-row: auto !important;
+  }
+
+  .home .hero .masthead .imageblock img {
+    width: 88px;
+    height: 88px;
+  }
+
+  .home .hero .masthead .name p {
+    font-size: 52px;
   }
 
   .home .paths ul {

@@ -118,7 +118,7 @@
 
 .chip-code {
   font-family: var(--mono);
-  background: var(--white);
+  background: var(--surface);
   border-color: var(--rule);
   color: var(--accent);
   font-weight: 500;

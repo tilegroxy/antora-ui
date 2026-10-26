@@ -2,6 +2,7 @@
   <div class="header-inner">
     <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="nav" aria-expanded="false"><span></span></button>
     <a class="brand" href="{{{or site.url (or siteRootUrl siteRootPath)}}}">
+      <img class="brand-logo" src="{{{uiRootPath}}}/img/logo.svg" alt="" width="28" height="28">
 {{#with (brandTitle site.title)}}
       <span class="brand-name">{{./name}}{{#if ./suffix}}<span class="brand-suffix"> {{./suffix}}</span>{{/if}}</span>
 {{/with}}
@@ -42,5 +43,8 @@
 {{/if}}
 {{/with}}
     </div>
+{{#if themeToggle}}
+{{> theme-toggle}}
+{{/if}}
   </div>
 </header>
