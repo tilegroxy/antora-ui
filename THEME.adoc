@@ -35,7 +35,7 @@ asciidoc:
 
 The header links (GitHub, Issues, Get tilegroxy) and the "Report an issue" link are derived from the content source's git remote when it's on GitHub or GitLab.
 To override them, set `repo_url`, `issues_url`, `releases_url` and `product_name` under `site.keys`.
-`manual_order` orders the manuals in the header by component name; without it, the start page's component comes first and the rest are sorted by title.
+`manual_order` orders the manuals in the header by component name; without it, the start page's component comes first and the rest are sorted by title. A component named `ROOT` is never listed, since the brand link goes to the site root.
 The footer falls back to `© <year> <site title>` when `footer_text` isn't set.
 `site.keys.google_analytics` still enables Google Analytics.
 

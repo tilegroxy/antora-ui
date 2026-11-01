@@ -1,9 +1,10 @@
 'use strict'
 
 // Header components, ordered by site.keys.manual_order (component names), else home component first
+// ROOT is left out because the brand link already reaches it
 module.exports = ({ data: { root } }) => {
   const site = root.site || {}
-  const components = Object.values(site.components || {})
+  const components = Object.values(site.components || {}).filter((c) => c.name !== 'ROOT')
   const order = String((site.keys || {}).manualOrder || '')
     .split(',')
     .map((s) => s.trim())
